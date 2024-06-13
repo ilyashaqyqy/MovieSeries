@@ -1,4 +1,4 @@
-package model;
+package com.msproje.movieSerieApp.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;

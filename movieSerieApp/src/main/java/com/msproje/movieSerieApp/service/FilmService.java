@@ -1,11 +1,9 @@
-package service;
+package com.msproje.movieSerieApp.service;
 
-
-
-import model.Film;
+import com.msproje.movieSerieApp.model.Film;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import repositorie.FilmRepository;
+import com.msproje.movieSerieApp.repositorie.FilmRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,8 +11,12 @@ import java.util.Optional;
 @Service
 public class FilmService {
 
+    private final FilmRepository filmRepository;
+
     @Autowired
-    private FilmRepository filmRepository;
+    public FilmService(FilmRepository filmRepository) {
+        this.filmRepository = filmRepository;
+    }
 
     public List<Film> getAllFilms() {
         return filmRepository.findAll();
@@ -32,4 +34,3 @@ public class FilmService {
         filmRepository.deleteById(id);
     }
 }
-

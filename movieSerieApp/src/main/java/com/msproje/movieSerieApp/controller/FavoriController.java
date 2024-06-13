@@ -1,13 +1,13 @@
-package controller;
+package com.msproje.movieSerieApp.controller;
 
-import model.Favori;
-import model.Film;
-import model.Serie;
+import com.msproje.movieSerieApp.model.Favori;
+import com.msproje.movieSerieApp.model.Film;
+import com.msproje.movieSerieApp.model.Serie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import service.FavoriService;
-import service.FilmService;
-import service.SerieService;
+import com.msproje.movieSerieApp.service.FavoriService;
+import com.msproje.movieSerieApp.service.FilmService;
+import com.msproje.movieSerieApp.service.SerieService;
 
 import java.util.List;
 

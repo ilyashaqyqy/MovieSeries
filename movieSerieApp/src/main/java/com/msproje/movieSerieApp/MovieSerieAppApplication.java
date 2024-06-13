@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 @SpringBootApplication
-@EntityScan(basePackages = "model")
+@EntityScan(basePackages = "com/msproje/movieSerieApp/model")
 public class MovieSerieAppApplication {
 
 	public static void main(String[] args) {

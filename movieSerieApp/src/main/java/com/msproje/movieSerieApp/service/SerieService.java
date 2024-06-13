@@ -1,9 +1,9 @@
-package service;
+package com.msproje.movieSerieApp.service;
 
-import model.Serie;
+import com.msproje.movieSerieApp.model.Serie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import repositorie.SerieRepository;
+import com.msproje.movieSerieApp.repositorie.SerieRepository;
 
 import java.util.List;
 import java.util.Optional;

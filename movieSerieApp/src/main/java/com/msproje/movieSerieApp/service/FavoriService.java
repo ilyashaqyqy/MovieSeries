@@ -1,17 +1,17 @@
-package service;
+package com.msproje.movieSerieApp.service;
 
 
-import exception.ResourceNotFoundException;
-import model.Favori;
-import model.Film;
-import model.Serie;
-import model.User;
+import com.msproje.movieSerieApp.exception.ResourceNotFoundException;
+import com.msproje.movieSerieApp.model.Favori;
+import com.msproje.movieSerieApp.model.Film;
+import com.msproje.movieSerieApp.model.Serie;
+import com.msproje.movieSerieApp.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import repositorie.FavoriRepository;
-import repositorie.FilmRepository;
-import repositorie.SerieRepository;
-import repositorie.UserRepository;
+import com.msproje.movieSerieApp.repositorie.FavoriRepository;
+import com.msproje.movieSerieApp.repositorie.FilmRepository;
+import com.msproje.movieSerieApp.repositorie.SerieRepository;
+import com.msproje.movieSerieApp.repositorie.UserRepository;
 
 import java.util.List;
 

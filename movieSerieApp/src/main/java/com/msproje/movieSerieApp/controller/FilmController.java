@@ -1,7 +1,7 @@
-package controller;
+package com.msproje.movieSerieApp.controller;
 
-import model.Film;
-import service.FilmService;
+import com.msproje.movieSerieApp.model.Film;
+import com.msproje.movieSerieApp.service.FilmService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

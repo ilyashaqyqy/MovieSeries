@@ -1,4 +1,4 @@
-package model;
+package com.msproje.movieSerieApp.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -12,13 +12,14 @@ import java.util.Date;
 @Getter
 @Setter
 @Entity
-public class Film {
+public class Serie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_film;
+    private Long id_serie;
     private String titre;
-    private Date dateSortie;
+    private Date dateDebut;
+    private Date dateFin;
     private String genre;
-    private String realisateur;
+    private String createur;
     private double note;
 }
