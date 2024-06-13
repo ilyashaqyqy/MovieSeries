@@ -4,6 +4,8 @@ import com.msproje.movieSerieApp.model.Favori;
 import com.msproje.movieSerieApp.model.Film;
 import com.msproje.movieSerieApp.model.Serie;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.msproje.movieSerieApp.service.FavoriService;
 import com.msproje.movieSerieApp.service.FilmService;
@@ -34,10 +36,10 @@ public class FavoriController {
         favoriService.addSerieToFavori(userId, serieId);
     }
 
-    @GetMapping("/user/{userId}")
-    public List<Favori> getUserFavoris(@PathVariable Long userId) {
-        return favoriService.getUserFavoris(userId);
-    }
+//    @GetMapping("/user/{userId}")
+//    public List<Favori> getUserFavoris(@PathVariable Long userId) {
+//        return favoriService.getUserFavoris(userId);
+//    }
 
     @GetMapping("/films")
     public List<Film> getAllFilms() {
@@ -57,6 +59,12 @@ public class FavoriController {
     @GetMapping("/user/{userId}/series")
     public List<Serie> getUserFavoriteSeries(@PathVariable Long userId) {
         return favoriService.getUserFavoriteSeries(userId);
+    }
+
+    @GetMapping("/{userId}")
+    public ResponseEntity<List<Favori>> getUserFavoris(@PathVariable Long userId) {
+        List<Favori> favoris = favoriService.getUserFavoris(userId);
+        return new ResponseEntity<>(favoris, HttpStatus.OK);
     }
 
 }
