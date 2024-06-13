@@ -1,16 +1,18 @@
 package model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.JoinColumn;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.data.annotation.Id;
 
-
-@Setter
 @Getter
+@Setter
 @Entity
 public class Favori {
-    @jakarta.persistence.Id
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -26,5 +28,4 @@ public class Favori {
     @ManyToOne
     @JoinColumn(name = "serie_id")
     private Serie serie;
-
 }

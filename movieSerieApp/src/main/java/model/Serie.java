@@ -3,18 +3,16 @@ package model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.data.annotation.Id;
 
 import java.util.Date;
 
-@Setter
 @Getter
+@Setter
 @Entity
 public class Serie {
-    // Getters et Setters
-    @jakarta.persistence.Id
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_serie;
@@ -24,5 +22,4 @@ public class Serie {
     private String genre;
     private String createur;
     private double note;
-
 }
