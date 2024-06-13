@@ -13,6 +13,7 @@ import com.msproje.movieSerieApp.repositorie.FilmRepository;
 import com.msproje.movieSerieApp.repositorie.SerieRepository;
 import com.msproje.movieSerieApp.repositorie.UserRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -54,4 +55,38 @@ public class FavoriService {
         User user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User not found"));
         return favoriRepository.findByUser(user);
     }
+
+    public List<Film> getUserFavoriteFilms(Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+
+        List<Favori> favoris = favoriRepository.findByUser(user);
+        List<Film> favoriteFilms = new ArrayList<>();
+
+        for (Favori favori : favoris) {
+            if (favori.getFilm() != null) {
+                favoriteFilms.add(favori.getFilm());
+            }
+        }
+
+        return favoriteFilms;
+    }
+
+    public List<Serie> getUserFavoriteSeries(Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+
+        List<Favori> favoris = favoriRepository.findByUser(user);
+        List<Serie> favoriteSeries = new ArrayList<>();
+
+        for (Favori favori : favoris) {
+            if (favori.getSerie() != null) {
+                favoriteSeries.add(favori.getSerie());
+            }
+        }
+
+        return favoriteSeries;
+    }
+
+
 }

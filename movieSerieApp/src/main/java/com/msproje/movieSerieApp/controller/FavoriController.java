@@ -48,4 +48,15 @@ public class FavoriController {
     public List<Serie> getAllSeries() {
         return serieService.getAllSeries();
     }
+
+    @GetMapping("/user/{userId}/films")
+    public List<Film> getUserFavoriteFilms(@PathVariable Long userId) {
+        return favoriService.getUserFavoriteFilms(userId);
+    }
+
+    @GetMapping("/user/{userId}/series")
+    public List<Serie> getUserFavoriteSeries(@PathVariable Long userId) {
+        return favoriService.getUserFavoriteSeries(userId);
+    }
+
 }
