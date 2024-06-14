@@ -1,5 +1,7 @@
 package com.msproje.movieSerieApp.controller;
 
+import com.msproje.movieSerieApp.dto.FilmDTO;
+import com.msproje.movieSerieApp.dto.SerieDTO;
 import com.msproje.movieSerieApp.model.Favori;
 import com.msproje.movieSerieApp.model.Film;
 import com.msproje.movieSerieApp.model.Serie;
@@ -36,20 +38,26 @@ public class FavoriController {
         favoriService.addSerieToFavori(userId, serieId);
     }
 
-//    @GetMapping("/user/{userId}")
-//    public List<Favori> getUserFavoris(@PathVariable Long userId) {
-//        return favoriService.getUserFavoris(userId);
-//    }
-
-
     @GetMapping("/user/{userId}/films")
-    public List<Film> getUserFavoriteFilms(@PathVariable Long userId) {
-        return favoriService.getUserFavoriteFilms(userId);
+    public ResponseEntity<?> getUserFavoriteFilms(@PathVariable Long userId) {
+        try {
+            List<FilmDTO> films = filmService.getAllFilmsDTO(); // Assuming getAllFilmsDTO() returns List<FilmDTO>
+            // You can filter films by userId or process them as needed here
+            return ResponseEntity.ok(films);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error retrieving user favorite films");
+        }
     }
 
     @GetMapping("/user/{userId}/series")
-    public List<Serie> getUserFavoriteSeries(@PathVariable Long userId) {
-        return favoriService.getUserFavoriteSeries(userId);
+    public ResponseEntity<?> getUserFavoriteSeries(@PathVariable Long userId) {
+        try {
+            List<SerieDTO> series = serieService.getAllSeriesDTO(); // Assuming getAllSeriesDTO() returns List<SerieDTO>
+            // You can filter series by userId or process them as needed here
+            return ResponseEntity.ok(series);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error retrieving user favorite series");
+        }
     }
 
     @GetMapping("/{userId}")
@@ -57,5 +65,4 @@ public class FavoriController {
         List<Favori> favoris = favoriService.getUserFavoris(userId);
         return new ResponseEntity<>(favoris, HttpStatus.OK);
     }
-
 }

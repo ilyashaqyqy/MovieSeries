@@ -6,44 +6,66 @@ import com.msproje.movieSerieApp.model.Serie;
 import com.msproje.movieSerieApp.repositorie.SerieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@Transactional
 public class SerieService {
 
+    private final SerieRepository serieRepository;
+
     @Autowired
-    private SerieRepository serieRepository;
+    public SerieService(SerieRepository serieRepository) {
+        this.serieRepository = serieRepository;
+    }
+
+    public List<SerieDTO> getAllSeriesDTO() {
+        List<Serie> series = serieRepository.findAll();
+        return series.stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+    }
+
+    public Optional<SerieDTO> getSerieDTOById(Long id) {
+        Optional<Serie> serieOptional = serieRepository.findById(id);
+        return serieOptional.map(this::convertToDTO);
+    }
 
     public SerieDTO addSerie(SerieDTO serieDTO) {
+        Serie serie = convertToEntity(serieDTO);
+        Serie savedSerie = serieRepository.save(serie);
+        return convertToDTO(savedSerie);
+    }
+
+    public void deleteSerie(Long id) {
+        serieRepository.deleteById(id);
+    }
+
+    private SerieDTO convertToDTO(Serie serie) {
+        SerieDTO serieDTO = new SerieDTO();
+        serieDTO.setIdSerie(serie.getId_serie());
+        serieDTO.setTitre(serie.getTitre());
+        serieDTO.setDateDebut(serie.getDateDebut());
+        serieDTO.setDateFin(serie.getDateFin());
+        serieDTO.setGenre(serie.getGenre());
+        serieDTO.setCreateur(serie.getCreateur());
+        serieDTO.setNote(serie.getNote());
+        return serieDTO;
+    }
+
+    private Serie convertToEntity(SerieDTO serieDTO) {
         Serie serie = new Serie();
+        serie.setId_serie(serieDTO.getIdSerie());
         serie.setTitre(serieDTO.getTitre());
         serie.setDateDebut(serieDTO.getDateDebut());
         serie.setDateFin(serieDTO.getDateFin());
         serie.setGenre(serieDTO.getGenre());
         serie.setCreateur(serieDTO.getCreateur());
         serie.setNote(serieDTO.getNote());
-
-        Serie savedSerie = serieRepository.save(serie);
-
-        return convertToDTO(savedSerie);
-    }
-
-    public List<SerieDTO> getAllSeries() {
-        List<Serie> series = serieRepository.findAll();
-        return series.stream().map(this::convertToDTO).collect(Collectors.toList());
-    }
-
-    private SerieDTO convertToDTO(Serie serie) {
-        SerieDTO dto = new SerieDTO();
-        dto.setIdSerie(serie.getId_serie());
-        dto.setTitre(serie.getTitre());
-        dto.setDateDebut(serie.getDateDebut());
-        dto.setDateFin(serie.getDateFin());
-        dto.setGenre(serie.getGenre());
-        dto.setCreateur(serie.getCreateur());
-        dto.setNote(serie.getNote());
-        return dto;
+        return serie;
     }
 }

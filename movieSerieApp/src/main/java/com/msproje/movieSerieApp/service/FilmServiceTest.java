@@ -29,8 +29,8 @@ public class FilmServiceTest implements CommandLineRunner {
         newFilm.setRealisateur("John Doe");
         newFilm.setNote(8.0);
 
-        Film savedFilm = filmService.saveFilm(newFilm);
-        System.out.println("Saved Film: " + savedFilm);
+//        Film savedFilm = filmService.saveFilm(newFilm);
+//        System.out.println("Saved Film: " + savedFilm);
     }
 
     private void testDeleteFilm() {
