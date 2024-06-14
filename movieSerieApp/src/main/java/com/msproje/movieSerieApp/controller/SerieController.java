@@ -1,9 +1,10 @@
+// src/main/java/com/msproje/movieSerieApp/controller/SerieController.java
 package com.msproje.movieSerieApp.controller;
 
-
-import com.msproje.movieSerieApp.model.Serie;
+import com.msproje.movieSerieApp.dto.SerieDTO;
 import com.msproje.movieSerieApp.service.SerieService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,16 +16,15 @@ public class SerieController {
     @Autowired
     private SerieService serieService;
 
-    @GetMapping
-    public List<Serie> getAllSeries() {
-        return serieService.getAllSeries();
-    }
-
     @PostMapping
-    public Serie saveSerie(@RequestBody Serie serie) {
-        return serieService.saveSerie(serie);
+    public ResponseEntity<SerieDTO> addSerie(@RequestBody SerieDTO serieDTO) {
+        SerieDTO savedSerie = serieService.addSerie(serieDTO);
+        return ResponseEntity.ok(savedSerie);
     }
 
-    // Other endpoints for updating, deleting, or retrieving single series
+    @GetMapping
+    public ResponseEntity<List<SerieDTO>> getAllSeries() {
+        List<SerieDTO> series = serieService.getAllSeries();
+        return ResponseEntity.ok(series);
+    }
 }
-
