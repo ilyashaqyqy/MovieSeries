@@ -3,8 +3,6 @@ package com.msproje.movieSerieApp.controller;
 import com.msproje.movieSerieApp.dto.FilmDTO;
 import com.msproje.movieSerieApp.dto.SerieDTO;
 import com.msproje.movieSerieApp.model.Favori;
-import com.msproje.movieSerieApp.model.Film;
-import com.msproje.movieSerieApp.model.Serie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

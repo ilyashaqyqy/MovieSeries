@@ -45,7 +45,7 @@ public class SerieService {
         serieRepository.deleteById(id);
     }
 
-    private SerieDTO convertToDTO(Serie serie) {
+    SerieDTO convertToDTO(Serie serie) {
         SerieDTO serieDTO = new SerieDTO();
         serieDTO.setIdSerie(serie.getId_serie());
         serieDTO.setTitre(serie.getTitre());

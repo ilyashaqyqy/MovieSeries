@@ -1,6 +1,7 @@
 package com.msproje.movieSerieApp.service;
 
-
+import com.msproje.movieSerieApp.dto.FilmDTO;
+import com.msproje.movieSerieApp.dto.SerieDTO;
 import com.msproje.movieSerieApp.exception.ResourceNotFoundException;
 import com.msproje.movieSerieApp.model.Favori;
 import com.msproje.movieSerieApp.model.Film;
@@ -13,8 +14,8 @@ import com.msproje.movieSerieApp.repositorie.FilmRepository;
 import com.msproje.movieSerieApp.repositorie.SerieRepository;
 import com.msproje.movieSerieApp.repositorie.UserRepository;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class FavoriService {
@@ -30,6 +31,12 @@ public class FavoriService {
 
     @Autowired
     private SerieRepository serieRepository;
+
+    @Autowired
+    private FilmService filmService;
+
+    @Autowired
+    private SerieService serieService;
 
     public void addFilmToFavori(Long userId, Long filmId) {
         User user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User not found"));
@@ -56,37 +63,21 @@ public class FavoriService {
         return favoriRepository.findByUser(user);
     }
 
-    public List<Film> getUserFavoriteFilms(Long userId) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
-
-        List<Favori> favoris = favoriRepository.findByUser(user);
-        List<Film> favoriteFilms = new ArrayList<>();
-
-        for (Favori favori : favoris) {
-            if (favori.getFilm() != null) {
-                favoriteFilms.add(favori.getFilm());
-            }
-        }
-
-        return favoriteFilms;
+    public List<FilmDTO> getUserFavoriteFilms(Long userId) {
+        User user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User not found"));
+        return favoriRepository.findByUser(user).stream()
+                .map(Favori::getFilm)
+                .filter(film -> film != null)
+                .map(filmService::convertToDTO)
+                .collect(Collectors.toList());
     }
 
-    public List<Serie> getUserFavoriteSeries(Long userId) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
-
-        List<Favori> favoris = favoriRepository.findByUser(user);
-        List<Serie> favoriteSeries = new ArrayList<>();
-
-        for (Favori favori : favoris) {
-            if (favori.getSerie() != null) {
-                favoriteSeries.add(favori.getSerie());
-            }
-        }
-
-        return favoriteSeries;
+    public List<SerieDTO> getUserFavoriteSeries(Long userId) {
+        User user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User not found"));
+        return favoriRepository.findByUser(user).stream()
+                .map(Favori::getSerie)
+                .filter(serie -> serie != null)
+                .map(serieService::convertToDTO)
+                .collect(Collectors.toList());
     }
-
-
 }

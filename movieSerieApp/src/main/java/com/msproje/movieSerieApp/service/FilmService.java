@@ -47,7 +47,7 @@ public class FilmService {
         filmRepository.deleteById(id);
     }
 
-    private FilmDTO convertToDTO(Film film) {
+    FilmDTO convertToDTO(Film film) {
         FilmDTO filmDTO = new FilmDTO();
         filmDTO.setIdFilm(film.getId_film());
         filmDTO.setTitre(film.getTitre());
