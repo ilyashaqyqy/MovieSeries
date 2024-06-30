@@ -31,12 +31,29 @@ public class FavoriController {
     private SerieService serieService;
 
     @PostMapping("/add-film")
-    public void addFilmToFavori(@RequestParam(required = false) Long userId, @RequestParam Long filmId) {
+    public ResponseEntity<?> addFilmToFavori(@RequestParam(required = false) Long userId, @RequestParam Long filmId) {
         if (userId == null) {
             userId = 3L; // Default user ID
         }
-        favoriService.addFilmToFavori(userId, filmId);
+
+        try {
+            // Check if film is already in favorites
+            boolean isFilmInFavorites = favoriService.isFilmInFavorites(userId, filmId);
+            if (isFilmInFavorites) {
+                return ResponseEntity.badRequest().body("Film is already in favorites.");
+            }
+
+            // Add film to favorites
+            favoriService.addFilmToFavori(userId, filmId);
+            return ResponseEntity.ok().body("Film added to favorites successfully.");
+        } catch (ResourceNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error adding film to favorites: " + e.getMessage());
+        }
     }
+
 
     @PostMapping("/add-serie")
     public void addSerieToFavori(@RequestParam Long userId, @RequestParam Long serieId) {

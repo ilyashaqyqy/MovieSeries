@@ -93,4 +93,15 @@ public class FavoriService {
 
         favoriRepository.delete(favori);
     }
+
+    public boolean isFilmInFavorites(Long userId, Long filmId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+
+        Film film = filmRepository.findById(filmId)
+                .orElseThrow(() -> new ResourceNotFoundException("Film not found"));
+
+        return favoriRepository.existsByUserAndFilm(user, film);
+    }
+
 }

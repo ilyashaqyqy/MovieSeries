@@ -13,4 +13,5 @@ import java.util.Optional;
 public interface FavoriRepository extends JpaRepository<Favori, Long> {
     List<Favori> findByUser(User user);
     Optional<Favori> findByUserAndFilm(User user, Film film);
+    boolean existsByUserAndFilm(User user, Film film);
 }
