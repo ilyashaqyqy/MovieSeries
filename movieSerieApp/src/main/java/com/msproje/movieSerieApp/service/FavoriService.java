@@ -59,7 +59,8 @@ public class FavoriService {
     }
 
     public List<Favori> getUserFavoris(Long userId) {
-        User user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User not found"));
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
         return favoriRepository.findByUser(user);
     }
 
@@ -79,5 +80,17 @@ public class FavoriService {
                 .filter(serie -> serie != null)
                 .map(serieService::convertToDTO)
                 .collect(Collectors.toList());
+    }
+
+    public void removeFilmFromFavori(Long userId, Long filmId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+        Film film = filmRepository.findById(filmId)
+                .orElseThrow(() -> new ResourceNotFoundException("Film not found"));
+
+        Favori favori = favoriRepository.findByUserAndFilm(user, film)
+                .orElseThrow(() -> new ResourceNotFoundException("Favori not found"));
+
+        favoriRepository.delete(favori);
     }
 }

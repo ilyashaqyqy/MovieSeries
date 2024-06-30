@@ -35,15 +35,15 @@ public class SerieService {
         return serieOptional.map(this::convertToDTO);
     }
 
-    public SerieDTO addSerie(SerieDTO serieDTO) {
-        Serie serie = convertToEntity(serieDTO);
-        Serie savedSerie = serieRepository.save(serie);
-        return convertToDTO(savedSerie);
-    }
-
-    public void deleteSerie(Long id) {
-        serieRepository.deleteById(id);
-    }
+//    public SerieDTO addSerie(SerieDTO serieDTO) {
+//        Serie serie = convertToEntity(serieDTO);
+//        Serie savedSerie = serieRepository.save(serie);
+//        return convertToDTO(savedSerie);
+//    }
+//
+//    public void deleteSerie(Long id) {
+//        serieRepository.deleteById(id);
+//    }
 
     SerieDTO convertToDTO(Serie serie) {
         SerieDTO serieDTO = new SerieDTO();

@@ -32,20 +32,24 @@ public class FilmService {
                 .collect(Collectors.toList());
     }
 
+
+
     public Optional<FilmDTO> getFilmDTOById(Long id) {
         Optional<Film> filmOptional = filmRepository.findById(id);
         return filmOptional.map(this::convertToDTO);
     }
 
-    public FilmDTO saveFilm(FilmDTO filmDTO) {
-        Film film = convertToEntity(filmDTO);
-        Film savedFilm = filmRepository.save(film);
-        return convertToDTO(savedFilm);
-    }
 
-    public void deleteFilm(Long id) {
-        filmRepository.deleteById(id);
-    }
+
+//    public FilmDTO saveFilm(FilmDTO filmDTO) {
+//        Film film = convertToEntity(filmDTO);
+//        Film savedFilm = filmRepository.save(film);
+//        return convertToDTO(savedFilm);
+//    }
+//
+//    public void deleteFilm(Long id) {
+//        filmRepository.deleteById(id);
+//    }
 
     FilmDTO convertToDTO(Film film) {
         FilmDTO filmDTO = new FilmDTO();

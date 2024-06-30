@@ -8,9 +8,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 @RestController
 @RequestMapping("/api/films")
+@CrossOrigin(origins = "http://localhost:54007")
 public class FilmController {
 
     private final FilmService filmService;
@@ -33,15 +35,15 @@ public class FilmController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @PostMapping
-    public ResponseEntity<FilmDTO> saveFilm(@RequestBody FilmDTO filmDTO) {
-        FilmDTO savedFilm = filmService.saveFilm(filmDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).body(savedFilm);
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteFilm(@PathVariable Long id) {
-        filmService.deleteFilm(id);
-        return ResponseEntity.noContent().build();
-    }
+//    @PostMapping
+//    public ResponseEntity<FilmDTO> saveFilm(@RequestBody FilmDTO filmDTO) {
+//        FilmDTO savedFilm = filmService.saveFilm(filmDTO);
+//        return ResponseEntity.status(HttpStatus.CREATED).body(savedFilm);
+//    }
+//
+//    @DeleteMapping("/{id}")
+//    public ResponseEntity<Void> deleteFilm(@PathVariable Long id) {
+//        filmService.deleteFilm(id);
+//        return ResponseEntity.noContent().build();
+//    }
 }

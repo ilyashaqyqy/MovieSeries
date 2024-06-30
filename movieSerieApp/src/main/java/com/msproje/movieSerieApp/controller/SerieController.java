@@ -33,15 +33,15 @@ public class SerieController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @PostMapping
-    public ResponseEntity<SerieDTO> addSerie(@RequestBody SerieDTO serieDTO) {
-        SerieDTO savedSerie = serieService.addSerie(serieDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).body(savedSerie);
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteSerie(@PathVariable Long id) {
-        serieService.deleteSerie(id);
-        return ResponseEntity.noContent().build();
-    }
+//    @PostMapping
+//    public ResponseEntity<SerieDTO> addSerie(@RequestBody SerieDTO serieDTO) {
+//        SerieDTO savedSerie = serieService.addSerie(serieDTO);
+//        return ResponseEntity.status(HttpStatus.CREATED).body(savedSerie);
+//    }
+//
+//    @DeleteMapping("/{id}")
+//    public ResponseEntity<Void> deleteSerie(@PathVariable Long id) {
+//        serieService.deleteSerie(id);
+//        return ResponseEntity.noContent().build();
+//    }
 }
